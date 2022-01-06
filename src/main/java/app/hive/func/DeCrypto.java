@@ -37,9 +37,10 @@ public class DeCrypto extends GenericUDF {
      * @throws HiveException
      */
     @Override
-    public Object evaluate(DeferredObject[] arguments) throws HiveException {
+    public String evaluate(DeferredObject[] arguments) throws HiveException {
 
-        if(arguments[0].get() == null){ return 0;
+        if(arguments[0].get() == null){
+            return null;
         }
         //引入私钥
         String testPrivateKeyFilePath = "rsa.key";
@@ -47,13 +48,15 @@ public class DeCrypto extends GenericUDF {
 
         //私钥解密
         String enCodeData = String.valueOf(arguments[0]); // 获取加密数据
-        try {
-            String decodedData = privateEncrypt(enCodeData, getPrivateKey(testPrivateKey)); // 获取解密数据
-            return decodedData;
-        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-            e.printStackTrace();
-        }
-        return null;
+//        try {
+//            String decodedData = privateEncrypt(enCodeData, getPrivateKey(testPrivateKey)); // 获取解密数据
+////            return Double.parseDouble(decodedData);
+//            return decodedData;
+//
+//        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+//            e.printStackTrace();
+//        }
+        return enCodeData;
     }
 
     @Override
