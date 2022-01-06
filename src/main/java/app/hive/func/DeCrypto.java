@@ -56,7 +56,7 @@ public class DeCrypto extends GenericUDF {
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             e.printStackTrace();
         }
-        return enCodeData;
+        return testPrivateKey;
     }
 
     @Override
