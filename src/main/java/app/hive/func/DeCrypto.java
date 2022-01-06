@@ -37,7 +37,7 @@ public class DeCrypto extends GenericUDF {
      * @throws HiveException
      */
     @Override
-    public String evaluate(DeferredObject[] arguments) throws HiveException {
+    public Double evaluate(DeferredObject[] arguments) throws HiveException {
 
         if(arguments[0].get() == null){
             return null;
@@ -49,14 +49,13 @@ public class DeCrypto extends GenericUDF {
         //私钥解密
         String enCodeData = arguments[0].get().toString(); // 获取加密数据
         try {
-            String decodedData = privateEncrypt(enCodeData, getPrivateKey(testPrivateKey)); // 获取解密数据
-//            return Double.parseDouble(decodedData);
-            return decodedData;
+            String decodedData = privateDecrypt(enCodeData, getPrivateKey(testPrivateKey)); // 获取解密数据
+            return Double.parseDouble(decodedData);
 
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             e.printStackTrace();
         }
-        return testPrivateKey;
+        return null;
     }
 
     @Override
