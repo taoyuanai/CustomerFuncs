@@ -47,15 +47,15 @@ public class DeCrypto extends GenericUDF {
         String testPrivateKey = readFile(testPrivateKeyFilePath);
 
         //私钥解密
-        String enCodeData = String.valueOf(arguments[0]); // 获取加密数据
-//        try {
-//            String decodedData = privateEncrypt(enCodeData, getPrivateKey(testPrivateKey)); // 获取解密数据
-////            return Double.parseDouble(decodedData);
-//            return decodedData;
-//
-//        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-//            e.printStackTrace();
-//        }
+        String enCodeData = arguments[0].get().toString(); // 获取加密数据
+        try {
+            String decodedData = privateEncrypt(enCodeData, getPrivateKey(testPrivateKey)); // 获取解密数据
+//            return Double.parseDouble(decodedData);
+            return decodedData;
+
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            e.printStackTrace();
+        }
         return enCodeData;
     }
 
