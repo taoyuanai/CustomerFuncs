@@ -43,7 +43,7 @@ public class DeCrypto extends GenericUDF {
             return null;
         }
         //引入私钥
-        String testPrivateKeyFilePath = "rsa.key";
+        String testPrivateKeyFilePath = "/etc/ecm/common-conf/se-cost-dw/rsa.key";
         String testPrivateKey = readFile(testPrivateKeyFilePath);
 
         //私钥解密
