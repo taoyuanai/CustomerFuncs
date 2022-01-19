@@ -36,26 +36,17 @@ public class DeCrypto extends GenericUDF {
      * @param arguments 输入的参数 * @return 返回值
      * @throws HiveException
      */
+    @lombok.SneakyThrows
     @Override
     public Double evaluate(DeferredObject[] arguments) throws HiveException {
-
-        if(arguments[0].get() == null){
-            return null;
-        }
         //引入私钥
         String testPrivateKeyFilePath = "/etc/ecm/common-conf/se-cost-dw/rsa.key";
         String testPrivateKey = readFile(testPrivateKeyFilePath);
 
         //私钥解密
         String enCodeData = arguments[0].get().toString(); // 获取加密数据
-        try {
-            String decodedData = privateDecrypt(enCodeData, getPrivateKey(testPrivateKey)); // 获取解密数据
-            return Double.parseDouble(decodedData);
-
-        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-            e.printStackTrace();
-        }
-        return null;
+        String decodedData = privateDecrypt(enCodeData, getPrivateKey(testPrivateKey)); // 获取解密数据
+        return Double.parseDouble(decodedData);
     }
 
     @Override
